@@ -1,7 +1,12 @@
 import React from "react";
+import Transactions from "../components/Transactions";
 
 const App = () => {
-  return <h1>Hello world!</h1>;
+  return (
+    <div>
+      <Transactions />
+    </div>
+  );
 };
 
 export default App;

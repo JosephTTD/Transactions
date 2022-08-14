@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card renders correctly 1`] = `
+<div
+  className="sc-bczRLJ dqnLyA"
+>
+  <img
+    src="images/mastercard.png"
+  />
+  <h3>
+    £undefined
+  </h3>
+  <span>
+    *** *** *** ***
+     
+    1
+    0
+    0
+    4
+  </span>
+  <div />
+</div>
+`;
+
+exports[`Card should render the prop values correctly 1`] = `
+<div
+  className="sc-bczRLJ dqnLyA"
+>
+  <img
+    src="images/mastercard.png"
+  />
+  <h3>
+    £100
+  </h3>
+  <span>
+    *** *** *** ***
+     
+    1
+    0
+    0
+    4
+  </span>
+  <div>
+    <p>
+      Jessy Day
+    </p>
+    <p>
+      01/2023
+    </p>
+  </div>
+</div>
+`;
