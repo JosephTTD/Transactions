@@ -76,7 +76,7 @@ describe("Transactions", () => {
     const transactions = wrapper.find("section").at(1);
 
     expect(transactions.children()).toHaveLength(mockResponseData.transactions.length);
-    expect(transactions.find("p").at(0).text()).toEqual(mockResponseData.transactions[3].description);
+    expect(transactions.find("p").at(0).text()).toEqual(mockResponseData.transactions[2].description);
   });
 
   it("should show error message when an error occurs", async () => {

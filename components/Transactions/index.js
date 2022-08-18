@@ -44,9 +44,9 @@ function Transactions() {
             (a, b) => parseFloat(a.amount.value) - parseFloat(b.amount.value)
         ).slice(0, transactions.length > 10 ? 10 : transactions.length);
 
-        // then sorting by date
+        // then sorting by date / most recent first
         const sortByDate = sortAmount.sort(function (a, b) {
-          return new Date(a.date) - new Date(b.date);
+          return new Date(b.date) - new Date(a.date);
         });
         
         setBalance(data.balance);
