@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   background-image: url('images/card-bg.png');
   background-repeat: no-repeat;
-  background-size: 110%;
+  background-size: 110% 100%;
   background-position: -20px;
   border-radius: 15px;
   color: black;

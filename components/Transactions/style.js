@@ -3,11 +3,11 @@ import styled, { css } from "styled-components";
 const Container = styled.div`
   background: white;
   color: black;
-  border-radius: 12px;
+  border-radius: 40px;
   padding: 30px 25px;
   width: 320px;
-  min-height: 75vh;
   height: auto;
+  min-height: 690px;
   margin: 0 auto;
   position: relative;
 
@@ -30,6 +30,10 @@ const Container = styled.div`
         to {
           transform: rotate(359deg);
         }
+      }
+
+      p {
+        color: red;
       }
 
       img {

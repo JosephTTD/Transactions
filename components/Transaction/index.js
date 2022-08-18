@@ -14,7 +14,7 @@ function Transaction({ name, value, currency, category, crest }) {
         </div>
       </Content>
 
-      {value &&  (
+      {value && (
         <p>
           {value}
           <sup> {currency}</sup>

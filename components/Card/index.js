@@ -11,7 +11,7 @@ function Card({ amount, name, doe }) {
   return (
     <Container>
       <img src="images/mastercard.png" />
-      <h3>{`£${amount}`}</h3>
+      <h3>{`£${amount || 0}`}</h3>
       <span>
         {divide} {show}
       </span>

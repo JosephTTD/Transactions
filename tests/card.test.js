@@ -1,42 +1,29 @@
 import React from "react";
-import * as renderer from "react-test-renderer";
+import toJson from "enzyme-to-json";
+import { shallow} from "enzyme";
 import Card from "../components/Card";
 
-/*jest.mock(Card, () => ({
-  Card: (props) => {
-    const MockCard = "mock-card";
-    return <MockCard {...props} />;
-  },
-}));*/
 
-const component = renderer.create(
+const component = shallow(
   <Card amount="100" name="Jessy Day" doe="01/2023" />
 );
 
 describe("Card", () => {
-  // snapshot tests
   it("renders correctly", () => {
-    const component = renderer.create(<Card />);
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(toJson(component)).toMatchSnapshot();
   });
 
   it("should render the prop values correctly", () => {
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(component.find("h3").text()).toEqual("£100");
+    expect(component.find("p").at(0).text()).toEqual("Jessy Day");
+    expect(component.find("p").at(1).text()).toEqual("01/2023");
   });
 
-  // write unit tests for Card component
-  it("should render the value passed to the prop correctly on ", () => {
-    const amount = component.root.findByType("h3").children[0];
-    expect(amount).toBe("£100");
-  });
-
-  it("should render the name passed to the prop correctly", () => {
-    const name = component.root.props.name;
-    expect(name).toBe("Jessy Day");
-  });
-
-  it("should render the doe passed to the prop correctly", () => {
-    const doe = component.root.props.doe;
-    expect(doe).toBe("01/2023");
+  it("should render zero if the amount prop is empty", () => {
+    const component = shallow(
+      <Card amount="" name="Jessy Day" doe="01/2023" />
+    );
+    const amount = component.find("h3").text();
+    expect(amount).toBe("£0");
   });
 });

@@ -6,10 +6,11 @@ import Transaction from "../Transaction";
 
 function Transactions() {
   const [data, setData] = useState(null);
+  const [balance , setBalance] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // generates a random hexcode, used for the Transaction 'crest' prop
+  // generates a random hexcode, used for the Transaction 'crest' prop, just a stylistic choice
   function randomColor() {
     const rangeSize = 10;
     const parts = [
@@ -36,16 +37,24 @@ function Transactions() {
           throw new Error(`Error: ${response.status}`);
         }
         let data = await response.json();
-        // sorting transactions by amount value
-        const sort = data.transactions
-          .sort(
+        let transactions = data.transactions;
+
+        // sorting transactions by amount value and slicing the first 10
+        const sortAmount = transactions.sort(
             (a, b) => parseFloat(a.amount.value) - parseFloat(b.amount.value)
-          )
-          .slice(0, 10);
-        setData(sort);
+        ).slice(0, transactions.length > 10 ? 10 : transactions.length);
+
+        // then sorting by date
+        const sortByDate = sortAmount.sort(function (a, b) {
+          return new Date(a.date) - new Date(b.date);
+        });
+        
+        setBalance(data.balance);
+        setData(sortByDate);
         setError(null);
       } catch (err) {
         setData(null);
+        setBalance(null);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -63,7 +72,7 @@ function Transactions() {
     );
   }
 
-  if (error !== null) {
+  if (error) {
     return (
       <Container loader>
         <p>{error}</p>
@@ -74,17 +83,17 @@ function Transactions() {
   return (
     <Container>
       <section>
-        <Card amount="400,001" name="MR J DOE" doe="09/26" />
+        <Card amount={balance?.amount} name="MR J DOE" doe="09/26" />
       </section>
 
       <h3>Transactions</h3>
 
       <section>
         {data &&
-          data.map((value) => {
+          data.map((value, index) => {
             return (
               <Transaction
-                key={value.id}
+                key={value.id || index}
                 name={value.description}
                 value={value.amount.value}
                 currency={value.amount.currency_iso}
