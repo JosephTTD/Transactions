@@ -10,7 +10,7 @@ body,
 #root,
 #root>div {
     height: 100%;
-    background: #2b2b2b;
+    background: #000000;
     overflow: hidden;
 }
 
