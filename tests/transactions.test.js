@@ -75,7 +75,7 @@ describe("Transactions", () => {
 
     const transactions = wrapper.find("section").at(1);
 
-    expect(transactions.children()).toHaveLength(mockResponseData.transactions.length);
+    expect(transactions.children()).toHaveLength(2);
     expect(transactions.find("p").at(0).text()).toEqual(mockResponseData.transactions[2].description);
   });
 

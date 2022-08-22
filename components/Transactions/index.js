@@ -6,7 +6,7 @@ import Transaction from "../Transaction";
 
 function Transactions() {
   const [data, setData] = useState(null);
-  const [balance , setBalance] = useState(null);
+  const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -39,18 +39,17 @@ function Transactions() {
         let data = await response.json();
         let transactions = data.transactions;
 
-        // sorting transactions by amount value and slicing the first 10
-        const sortAmount = transactions.sort(
-            (a, b) => parseFloat(a.amount.value) - parseFloat(b.amount.value)
-        ).slice(0, transactions.length > 10 ? 10 : transactions.length);
+        // 10 smallest expenses
+        const sortAmount = transactions
+          .filter((a) => a.amount.value < 0)
+          .sort((a, b) => b.amount.value - a.amount.value)
+          .slice(0, transactions.length > 10 ? 10 : transactions.length);
 
-        // then sorting by date / most recent first
-        const sortByDate = sortAmount.sort(function (a, b) {
-          return new Date(b.date) - new Date(a.date);
-        });
-        
+        sortAmount.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
         setBalance(data.balance);
-        setData(sortByDate);
+        setData(sortAmount);
         setError(null);
       } catch (err) {
         setData(null);
